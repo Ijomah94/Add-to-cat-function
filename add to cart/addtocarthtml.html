@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Add to Cart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  Mobile - <input type="button" value="Add to Cart" onclick="add('Mobile')"/>
+  Laptop - <input type="button" value="Add to Cart" onclick="add('Laptop')"/>
+  Tablet - <input type="button" value="Add to Cart" onclick="add('Tablet')"/>
+  LED - <input type="button" value="Add to Cart" onclick="add('LED')"/>
+
+  <h4 id="show">show cart</h4>
+
+  <div id="cart">
+    Total Item - <b id="c"></b>
+    <ol id="hello"></ol> <!--item detail here-->
+    <span id="close">X</span>
+  </div>
+
+  <script>
+
+var x = 0;
+    document.getElementById('c').innerText=x;
+
+    var Close = document.getElementById('close');
+
+    var Cart = document.getElementById('cart');
+
+    var Show = document.getElementById('show');
+
+    function add(val){
+      document.getElementById("hello").innerHTML += "<li>"+val+"<input type='button' value='X' onclick='remove()'/></li>";
+      x=x+1;
+      document.getElementById('c').innerText=x;
+    }
+
+
+    Close.addEventListener('click', function(){
+      Cart.classList.toggle('close');
+    });
+
+    Show.addEventListener('click', function(){
+      Cart.classList.toggle('show');
+
+      if(Cart.classList.contains("show")){
+          Show.innerText = "Hide Cart"
+        }else{
+          Show.innerText = 'Show Cart'
+        }
+    });
+
+    //removing items from cart
+    function remove(){
+    var listItem = document.getElementsByTagName('li');
+    for(var i =0; i<listItem.length; i++){
+
+      listItem[i].onclick=function(){
+        this.parentNode.removeChild(this);
+      }
+    }
+
+    x=x-1
+    document.getElementById('c').innerText=x;
+  }
+
+
+
+  </script>
+  
+</body>
+</html>
